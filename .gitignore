@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Environment variables
+.env
+.env.local
+
+# Data files (keep large raw files out of git)
+data/raw/*
+!data/README.md
+!data/raw/.gitkeep
+
+# Virtual environment
+.venv/

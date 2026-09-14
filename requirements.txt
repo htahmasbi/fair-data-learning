@@ -1,0 +1,9 @@
+mp-api>=0.41
+pymatgen>=2024.0
+pandas>=2.0
+jupyter
+matplotlib
+seaborn
+scikit-learn
+python-dotenv
+pyyaml

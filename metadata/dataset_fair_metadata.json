@@ -1,0 +1,21 @@
+{
+    "metadata": {
+        "name": "Materials Project Oxide Dataset",
+        "description": "Subset of materials data from Materials Project containing oxide materials with properties relevant to energy applications.",
+        "version": "1.0.0",
+        "created_date": "2024-01-15",
+        "license": "CC-BY-4.0",
+        "provenance": {
+            "source": "Materials Project",
+            "source_url": "https://next-gen.materialsproject.org/api",
+            "access_date": "2024-01-15",
+            "data_generation_method": "Density Functional Theory (DFT) calculations",
+            "queries_used": "MP API query for oxide materials"
+        },
+        "spatial_coverage": "Global",
+        "temporal_coverage": "All time periods",
+        "keywords": ["materials science", "oxides", "DFT", "band gap", "formation energy", "crystal structure"]
+    },
+    "schema_version": "1.0.0",
+    "vocabulary": "Schema.org"
+}

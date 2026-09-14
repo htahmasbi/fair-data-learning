@@ -1,0 +1,27 @@
+{
+  "source": "Materials Project",
+  "query": {
+    "elements": [
+      "O"
+    ],
+    "num_elements": [
+      2,
+      3
+    ],
+    "fields": [
+      "material_id",
+      "formula_pretty",
+      "symmetry",
+      "formation_energy_per_atom",
+      "band_gap",
+      "density",
+      "nsites",
+      "is_stable",
+      "energy_above_hull"
+    ]
+  },
+  "fetch_date": "2026-09-14T12:33:54.215614",
+  "num_materials": 1000,
+  "license": "CC-BY-4.0",
+  "notebook": "01_fetch_explore_mp_data.ipynb"
+}
