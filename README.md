@@ -2,6 +2,8 @@
 
 Learning project for **FAIR semantic data infrastructure**, **data science**, and **MLOps** using materials science data.
 
+> **Skill roadmap:** see [LEARNING_ROADMAP.md](LEARNING_ROADMAP.md) for the full learning plan covering data science, FAIR/semantic infrastructure, MLOps, and job preparation.
+
 ## Goals
 
 - Practice FAIR principles with real research data
