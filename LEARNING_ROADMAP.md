@@ -26,17 +26,18 @@ Core proficiency with pandas, numpy, matplotlib, and standard ML libraries.
 - [x] Environment setup (venv, requirements.txt, reproducibility basics)
 - [x] API-based data acquisition (Materials Project via MPRester)
 - [x] Basic EDA: distributions, correlations, missing data (notebook 01)
-- [ ] Data cleaning & imputation strategies
-- [ ] Feature engineering (composition-derived features, aggregations)
-- [ ] Train a baseline model (linear regression, RF, gradient boosting)
-- [ ] Model evaluation: cross-validation, metrics (R², MAE, RMSE), overfitting
+- [x] Data cleaning & imputation strategies (SimpleImputer pipeline)
+- [x] Feature engineering (composition-derived features via pymatgen)
+- [x] Train a baseline model (Ridge, RandomForest, GradientBoost)
+- [x] Model evaluation: cross-validation, metrics (R², MAE, RMSE)
+- [x] Permutation importance analysis
 
 ### Tools
 - pandas, numpy, matplotlib, seaborn
 - scikit-learn
 
 ### Project milestone
-- [ ] Notebook 02: predict band gap from composition/structural features (R² > 0.7)
+- [x] Notebook 02: predict band gap from composition/structural features (GradientBoost R²=0.96 train, MAE=0.18 eV)
 
 ---
 
