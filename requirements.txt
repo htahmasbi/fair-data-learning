@@ -7,3 +7,6 @@ seaborn
 scikit-learn
 python-dotenv
 pyyaml
+dvc[s3]
+mlflow
+pytest

@@ -1,0 +1,46 @@
+params:
+  - params.yaml
+
+stages:
+  features:
+    cmd: python src/features.py
+    deps:
+      - src/data.py
+      - src/features.py
+      - data/processed/mp_oxides_clean.csv
+    params:
+      - data
+      - features
+    outs:
+      - data/processed/features.parquet
+      - data/processed/target.parquet
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - src/config.py
+      - data/processed/features.parquet
+      - data/processed/target.parquet
+    params:
+      - train
+      - features
+    outs:
+      - models/model.pkl
+    metrics:
+      - metrics.json:
+          cache: false
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.pkl
+      - data/processed/features.parquet
+      - data/processed/target.parquet
+    params:
+      - train
+      - features
+    outs:
+      - data/processed/feature_importances.csv
+      - data/processed/feature_importances.png

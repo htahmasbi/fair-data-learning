@@ -228,3 +228,16 @@ data/raw/*
 
 # Virtual environment
 .venv/
+
+# MLflow
+mlruns/
+mlflow.db
+*.db-journal
+
+# DVC local cache and state
+.dvc/cache
+.dvc/tmp
+
+# DVC pipeline outputs (owned by DVC, not git)
+data/processed/*.parquet
+models/

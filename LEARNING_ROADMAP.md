@@ -74,14 +74,14 @@ These skills are the differentiator for research-data jobs (RDM, FAIR data stewa
 MLOps = CI/CD for ML + data/model versioning + experiment tracking + monitoring. This is what employers explicitly search for.
 
 ### Skills
-- [ ] Data versioning: **DVC** (data + model as code)
-- [ ] Experiment tracking: **MLflow** (params, metrics, artifacts, model registry)
-- [ ] Project structure: `src/` packages, tests, `pyproject.toml`, Makefile
-- [ ] Unit tests for data pipelines and models (pytest)
-- [ ] CI/CD: GitHub Actions (lint, test, train, validate)
+- [x] Data versioning: **DVC** (data + model as code) — `dvc.yaml` with 3 stages
+- [x] Experiment tracking: **MLflow** (params, metrics, artifacts, model registry) — `band_gap_predictor` v1
+- [x] Project structure: `src/` packages, `pyproject.toml`, Makefile, `params.yaml`
+- [x] Unit tests for data pipelines and models (pytest, 8 tests)
+- [x] CI/CD: GitHub Actions (lint, test, train, validate) — `.github/workflows/ci.yml`
 - [ ] Model registry + model serving (MLflow serve, ONNX)
 - [ ] Containerization: Docker (image for model, deterministic deps)
-- [ ] Configuration & feature store concepts (options: Feast, or simple versioned features)
+- [ ] Configuration & feature store concepts
 - [ ] Model monitoring basics: drift, retraining triggers (Evidently/AI)
 - [ ] Reproducibility: pinned dependencies, seeds, hashes, environments
 
@@ -91,9 +91,9 @@ MLOps = CI/CD for ML + data/model versioning + experiment tracking + monitoring.
 - Evidently (drift), optionally Kubeflow/Airflow (later)
 
 ### Project milestone
-- [ ] Reproduce notebook 02 end-to-end via `dvc repro`
-- [ ] Track all experiments in MLflow with model registry
-- [ ] GitHub Actions: `test` → `train` → `register model`
+- [x] Reproduce pipeline end-to-end via `dvc repro` (features → train → evaluate)
+- [x] Track experiments in MLflow with model registry (GradientBoost CV R²=0.719)
+- [x] GitHub Actions: `test` → `dvc repro` → `metrics show`
 - [ ] Serve band-gap model via Dockerized FastAPI + CI pipeline
 
 ---
