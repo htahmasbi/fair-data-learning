@@ -44,3 +44,15 @@ stages:
     outs:
       - data/processed/feature_importances.csv
       - data/processed/feature_importances.png
+
+  semantic:
+    cmd: python src/rdf.py
+    deps:
+      - src/rdf.py
+      - src/vocab.py
+      - src/config.py
+      - data/processed/mp_oxides_clean.csv
+    params:
+      - data
+    outs:
+      - data/processed/knowledge_graph.ttl

@@ -10,3 +10,5 @@ pyyaml
 dvc[s3]
 mlflow
 pytest
+rdflib
+requests

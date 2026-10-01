@@ -1,0 +1,79 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "dcat": "https://www.w3.org/ns/dcat#",
+    "dcterms": "https://www.dublincore.org/specifications/dublin-core/dcmi-terms/",
+    "prov": "https://www.w3.org/ns/prov#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dpv": "https://www.dataprotection.gov.gg/legal/privacy-policy/"
+  },
+  "@id": "https://example.org/datasets/mp-oxides-v1",
+  "@type": ["dcat:Dataset", "schema:Dataset"],
+  "dcterms:title": "Materials Project Oxides: 1000 Materials Subset",
+  "dcterms:description": "Subset of 1000 oxide materials from the Materials Project database (band gap, formation energy, crystal structure, density) with composition and structural descriptors, retrieved via the Materials Project REST API.",
+  "dcterms:identifier": "mp-oxides-v1",
+  "schema:version": "1.0.0",
+  "dcterms:created": "2026-09-14",
+  "dcterms:modified": "2026-09-23",
+  "schema:license": {
+    "@type": "schema:CreativeWork",
+    "schema:name": "CC-BY-4.0",
+    "schema:url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "schema:creator": {
+    "@type": "schema:Person",
+    "schema:name": "Hossein Tahmasbi",
+    "schema:url": "https://github.com/htahmasbi"
+  },
+  "schema:keywords": ["materials science", "oxides", "DFT", "band gap", "formation energy", "crystal structure"],
+  "dcat:contactPoint": {
+    "@type": "schema:ContactPoint",
+    "schema:email": "placeholder@example.org"
+  },
+  "dcat:distribution": {
+    "@type": "dcat:Distribution",
+    "dcat:accessURL": "https://github.com/htahmasbi/fair-data-learning",
+    "dcat:mediaType": "text/csv",
+    "dcterms:format": "text/csv",
+    "schema:contentUrl": "data/processed/mp_oxides_clean.csv"
+  },
+  "prov:wasDerivedFrom": {
+    "@id": "https://next-gen.materialsproject.org/api",
+    "dcat:wasGeneratedBy": {
+      "@type": "prov:Activity",
+      "prov:startedAtTime": "2026-09-14T12:00:00Z",
+      "prov:used": {
+        "@type": "prov:Entity",
+        "dcterms:title": "Materials Project REST API query",
+        "dcterms:description": "Query: elements containing O, 2-3 elements, fields: material_id, formula, symmetry, formation_energy, band_gap, density, nsites, is_stable, energy_above_hull"
+      }
+    }
+  },
+  "dcterms:spatial": "global",
+  "dcterms:accrualMethod": "API query to Materials Project REST API (mp-api 0.46)",
+  "schema:variableMeasured": [
+    {
+      "@type": "schema:PropertyValue",
+      "schema:name": "band_gap",
+      "schema:unitText": "eV",
+      "schema:description": "Electronic band gap computed by DFT"
+    },
+    {
+      "@type": "schema:PropertyValue",
+      "schema:name": "formation_energy_per_atom",
+      "schema:unitText": "eV/atom",
+      "schema:description": "Formation energy per atom computed by DFT"
+    },
+    {
+      "@type": "schema:PropertyValue",
+      "schema:name": "density",
+      "schema:unitText": "g/cm3",
+      "schema:description": "Crystallographic density"
+    },
+    {
+      "@type": "schema:PropertyValue",
+      "schema:name": "crystal_system",
+      "schema:description": "Crystal system from symmetry analysis"
+    }
+  ]
+}

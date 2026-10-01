@@ -229,6 +229,9 @@ data/raw/*
 # Virtual environment
 .venv/
 
+# Editor swap files
+*.swp
+
 # MLflow
 mlruns/
 mlflow.db
@@ -240,4 +243,5 @@ mlflow.db
 
 # DVC pipeline outputs (owned by DVC, not git)
 data/processed/*.parquet
+data/processed/*.ttl
 models/

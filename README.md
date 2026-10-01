@@ -65,10 +65,19 @@ mlflow ui --backend-store-uri sqlite:///mlflow.db   # http://localhost:5000
 data/mp_oxides_clean.csv --features--> features.parquet
 features.parquet --train--> model.pkl + metrics.json
 model.pkl --evaluate--> feature_importances.csv/png
+mp_oxides_clean.csv --semantic--> knowledge_graph.ttl (RDF triples)
 ```
 
 Change a value in `params.yaml` (e.g. `RandomForest.n_estimators`)
 and rerun `dvc repro` — only affected stages re-run.
+
+## FAIR / Semantic Layer
+
+- `metadata/dataset_metadata.jsonld` — machine-readable metadata using Schema.org + DCAT + PROV-O
+- `src/vocab.py` — URIs/namespaces for the materials ontology
+- `src/rdf.py` — builds `knowledge_graph.ttl` (12k triples: materials → structures → properties → provenance)
+- `src/sparql.py` — example SPARQL queries (run via `python src/sparql.py`)
+- `notebooks/03_fair_semantic_layer.ipynb` — interactive walkthrough
 
 ## Data Source
 

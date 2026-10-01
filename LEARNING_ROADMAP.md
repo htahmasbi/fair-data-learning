@@ -47,13 +47,13 @@ FAIR = **F**indable, **A**ccessible, **I**nteroperable, **R**eusable.
 These skills are the differentiator for research-data jobs (RDM, FAIR data steward, data engineer).
 
 ### Skills
-- [ ] FAIR principles deep-dive (metadata, PIDs/DOIs, licensing, provenance)
-- [ ] Metadata standards: Schema.org, DCAT, Dublin Core, CFF
-- [ ] Semantic web basics: RDF, ontologies, namespaces, URIs
-- [ ] SPARQL query language + RDFLib for querying knowledge graphs
+- [x] FAIR principles deep-dive (metadata, PIDs/DOIs, licensing, provenance)
+- [x] Metadata standards: Schema.org, DCAT, Dublin Core, CFF
+- [x] Semantic web basics: RDF, ontologies, namespaces, URIs
+- [x] SPARQL query language + RDFLib for querying knowledge graphs
 - [ ] Data containers: RO-Crate, CFF (citation file format), DataCite
-- [ ] Ontology development in a domain (e.g., materials) with Protégé
-- [ ] Provenance modelling (W3C PROV-O)
+- [x] Ontology vocabulary design (lightweight `src/vocab.py` ontology; Protégé next)
+- [x] Provenance modelling (W3C PROV-O)
 - [ ] Working with PIDs/DOIs and repositories (Zenodo, Figshare)
 - [ ] Zotero for reference management integration
 
@@ -64,8 +64,9 @@ These skills are the differentiator for research-data jobs (RDM, FAIR data stewa
 - Json-schema / data validation (pydantic)
 
 ### Project milestone
-- [ ] Publish `mp_oxides_clean.csv` as a FAIR data package (metadata JSON-LD, schema, pid)
-- [ ] Build a small knowledge graph: materials → structures → properties → publications, queryable via SPARQL
+- [x] JSON-LD metadata (Schema.org + DCAT + PROV) for `mp_oxides_clean.csv`
+- [x] Knowledge graph (materials → structures → properties → provenance), 12k triples, queryable via SPARQL
+- [ ] Publish dataset as Zenodo record with DOI
 
 ---
 

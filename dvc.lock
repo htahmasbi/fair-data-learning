@@ -160,3 +160,32 @@ stages:
       hash: md5
       md5: 7560931dd3cc371dfca7f6b46830d61c
       size: 67128
+  semantic:
+    cmd: python src/rdf.py
+    deps:
+    - path: data/processed/mp_oxides_clean.csv
+      hash: md5
+      md5: 6c0d68b5aba9410cd70a192babcabf8c
+      size: 106546
+    - path: src/config.py
+      hash: md5
+      md5: 0dcd0d2993c406298cf92738e3b89194
+      size: 556
+    - path: src/rdf.py
+      hash: md5
+      md5: dce25e3a7ac2d81504c34b73231e3834
+      size: 4671
+    - path: src/vocab.py
+      hash: md5
+      md5: d706adb2d0afa7f905a1b01cec0c6e75
+      size: 1114
+    params:
+      params.yaml:
+        data:
+          input: data/processed/mp_oxides_clean.csv
+          output_dir: data/processed
+    outs:
+    - path: data/processed/knowledge_graph.ttl
+      hash: md5
+      md5: 098a9f777edc00f668d47653b6f758e0
+      size: 556407
