@@ -1,0 +1,70 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "Fair Data Learning - Materials Project Oxides",
+      "description": "Reproducible ML (band-gap prediction) + FAIR semantic layer for 1000 oxide materials from the Materials Project.",
+      "datePublished": "2026-09-14",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "creator": {
+        "@id": "#htahmasbi"
+      },
+      "hasPart": [
+        {
+          "@id": "./data/processed/mp_oxides_clean.csv"
+        },
+        {
+          "@id": "./data/processed/knowledge_graph.ttl"
+        },
+        {
+          "@id": "./metadata/dataset_metadata.jsonld"
+        }
+      ]
+    },
+    {
+      "@id": "#htahmasbi",
+      "@type": "Person",
+      "name": "Hossein Tahmasbi",
+      "url": "https://github.com/htahmasbi"
+    },
+    {
+      "@id": "./data/processed/mp_oxides_clean.csv",
+      "@type": "File",
+      "name": "mp_oxides_clean.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": 52071,
+      "description": "1000 oxide materials from Materials Project (band gap, formation energy, crystal structure, density).",
+      "isBasedOn": {
+        "@id": "https://materialsproject.org/api"
+      }
+    },
+    {
+      "@id": "./data/processed/knowledge_graph.ttl",
+      "@type": "File",
+      "name": "knowledge_graph.ttl",
+      "encodingFormat": "text/turtle",
+      "description": "RDF knowledge graph: materials -> structures -> properties -> provenance (12,196 triples)."
+    },
+    {
+      "@id": "./metadata/dataset_metadata.jsonld",
+      "@type": "File",
+      "name": "dataset_metadata.jsonld",
+      "encodingFormat": "application/ld+json",
+      "description": "Machine-readable dataset metadata using Schema.org + DCAT + PROV-O."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "creators": [
+    {
+      "name": "Hossein Tahmasbi",
+      "affiliation": "",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "title": "fair-data-learning: FAIR + MLOps for materials science data",
+  "description": "Learning repository demonstrating FAIR semantic data infrastructure, data science, and MLOps using Materials Project data. Includes reproducible DVC pipeline for band-gap prediction, MLflow experiment tracking, RDF knowledge graph with SPARQL, and RO-Crate metadata.",
+  "keywords": [
+    "FAIR data",
+    "semantic web",
+    "RDF",
+    "SPARQL",
+    "MLOps",
+    "materials informatics",
+    "machine learning"
+  ],
+  "license": "apache-2.0",
+  "upload_type": "software",
+  "access_right": "open"
+}

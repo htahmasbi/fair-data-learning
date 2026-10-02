@@ -74,10 +74,22 @@ and rerun `dvc repro` — only affected stages re-run.
 ## FAIR / Semantic Layer
 
 - `metadata/dataset_metadata.jsonld` — machine-readable metadata using Schema.org + DCAT + PROV-O
+- `metadata/materials_ontology.owl` — OWL ontology (classes/properties), editable in Protégé
+- `metadata/ro-crate-metadata.json` — RO-Crate research object bundle
 - `src/vocab.py` — URIs/namespaces for the materials ontology
 - `src/rdf.py` — builds `knowledge_graph.ttl` (12k triples: materials → structures → properties → provenance)
 - `src/sparql.py` — example SPARQL queries (run via `python src/sparql.py`)
 - `notebooks/03_fair_semantic_layer.ipynb` — interactive walkthrough
+- `CITATION.cff` — cite this repository (shown automatically on GitHub)
+- `.zenodo.json` — Zenodo archive config (publish a GitHub Release → DOI)
+- `FAIRNESS_CHECKLIST.md` — 15 FAIR sub-principles mapped to evidence (9/15 fully met)
+
+Regenerate bundled artifacts:
+
+```bash
+python src/ontology.py   # -> metadata/materials_ontology.owl
+python src/ro_crate.py   # -> metadata/ro-crate-metadata.json
+```
 
 ## Data Source
 

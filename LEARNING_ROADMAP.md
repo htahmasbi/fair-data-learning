@@ -51,22 +51,23 @@ These skills are the differentiator for research-data jobs (RDM, FAIR data stewa
 - [x] Metadata standards: Schema.org, DCAT, Dublin Core, CFF
 - [x] Semantic web basics: RDF, ontologies, namespaces, URIs
 - [x] SPARQL query language + RDFLib for querying knowledge graphs
-- [ ] Data containers: RO-Crate, CFF (citation file format), DataCite
-- [x] Ontology vocabulary design (lightweight `src/vocab.py` ontology; Protégé next)
+- [x] Data containers: RO-Crate, CFF (citation file format), DataCite
+- [x] Ontology development in a domain (OWL ontology generated via code; Protégé to refine)
 - [x] Provenance modelling (W3C PROV-O)
-- [ ] Working with PIDs/DOIs and repositories (Zenodo, Figshare)
+- [ ] Working with PIDs/DOIs and repositories (Zenodo, Figshare) — `.zenodo.json` ready, DOI pending on release
 - [ ] Zotero for reference management integration
 
 ### Tools
 - RDFLib, SPARQL endpoints
-- Protégé (ontology editor)
+- Protégé (ontology editor) — load `metadata/materials_ontology.owl`
 - Frictionless Data / Data Package
 - Json-schema / data validation (pydantic)
 
 ### Project milestone
 - [x] JSON-LD metadata (Schema.org + DCAT + PROV) for `mp_oxides_clean.csv`
 - [x] Knowledge graph (materials → structures → properties → provenance), 12k triples, queryable via SPARQL
-- [ ] Publish dataset as Zenodo record with DOI
+- [x] OWL ontology (`metadata/materials_ontology.owl`), RO-Crate (`ro-crate-metadata.json`), `CITATION.cff`, FAIR self-assessment
+- [ ] Publish dataset as Zenodo record with DOI (trigger via GitHub Release)
 
 ---
 
