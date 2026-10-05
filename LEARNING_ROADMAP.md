@@ -105,16 +105,23 @@ MLOps = CI/CD for ML + data/model versioning + experiment tracking + monitoring.
 For jobs involving production ML/AI systems.
 
 ### Skills
-- [ ] REST API design with **FastAPI** (endpoints, validation, docs)
+- [x] REST API design with **FastAPI** (endpoints, validation, auto OpenAPI docs)
 - [ ] Async/concurrency basics (where relevant)
-- [ ] Deployment: Docker, compose; cloud options (Fly.io, GCP/AWS free tiers)
-- [ ] Logging, error handling, timeouts
-- [ ] Model artifacts & feature computation service separation
-- [ ] Light-weight monitoring (Evidently + FastAPI health checks)
+- [x] Deployment: Docker (multi-stage, non-root user, HEALTHCHECK), Makefile targets
+- [x] Error handling: 503 when model unavailable, 422 on invalid input
+- [x] Model artifact separation: DVC-tracked `models/` loaded once at startup
+- [x] Liveness probe (`/health`) + provenance endpoint (`/model-info`) — FAIR/R
+- [ ] Cloud deploy (Fly.io / GCP Cloud Run / AWS free tier) — optional
+- [ ] Load testing & autoscaling
 
 ### Tools
-- FastAPI, uvicorn, Docker, compose
-- Optional: cloud GPU (later)
+- FastAPI, uvicorn, TestClient
+- Docker
+
+### Project milestone
+- [x] Serve band-gap model via FastAPI (10 endpoint tests)
+- [x] Dockerfile + .dockerignore (build untested locally — docker not installed here)
+- [ ] Deploy to a free-tier cloud host
 
 ---
 
@@ -198,17 +205,26 @@ For job applications as Data Scientist / ML Engineer / FAIR data / data engineer
 
 | Skill group | Level now | Target | Status |
 |-------------|-----------|--------|--------|
-| Python/pandas EDA | Beginner | Proficient | ✅ done |
+| Python/pandas EDA | Proficient | Proficient | ✅ done |
 | Materials science domain | Proficient | — | existing |
-| scikit-learn ML | Beginner | Proficient | in progress |
+| scikit-learn ML | Proficient | Proficient | ✅ done |
 | SQL | — | Basic | to do |
-| FAIR metadata/RDF | Beginner | Proficient | to do |
-| DVC | — | Proficient | to do |
-| MLflow | — | Proficient | to do |
-| Docker/CI | — | Basic | to do |
-| FastAPI | — | Basic | to do |
+| FAIR metadata/RDF | Proficient | Proficient | ✅ done |
+| DVC | Proficient | Proficient | ✅ done |
+| MLflow | Proficient | Proficient | ✅ done |
+| Docker/CI | Basic | Proficient | in progress (Dockerfile written, build untested) |
+| FastAPI | Proficient | Proficient | ✅ done |
 
 ---
 
-*Last updated: 2026-09-14*
+## Portfolio talking points (resume bullets)
+
+- Built a **reproducible ML pipeline** (DVC + MLflow) predicting DFT band gap of 1000 oxide materials; GradientBoost CV R²=0.72
+- Exposed the model as a **production REST API** (FastAPI, Docker, non-root, healthcheck) sharing feature code between train/serve to avoid skew
+- Made the dataset **FAIR**: JSON-LD metadata (Schema.org/DCAT/PROV-O), OWL ontology, 12k-triple **RDF knowledge graph** with **SPARQL** queries, RO-Crate packaging, Zenodo DOI config
+- Added **26 automated tests** + GitHub Actions CI (pytest → dvc repro → metrics)
+
+---
+
+*Last updated: 2026-09-23*
 *Owner: htahmasbi*

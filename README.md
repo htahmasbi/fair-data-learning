@@ -91,6 +91,46 @@ python src/ontology.py   # -> metadata/materials_ontology.owl
 python src/ro_crate.py   # -> metadata/ro-crate-metadata.json
 ```
 
+## Deployment (FastAPI + Docker)
+
+The trained model is served as a REST API with input validation and
+auto-generated OpenAPI docs.
+
+```bash
+# Local
+make serve      # http://localhost:8000/docs
+
+# Container
+make docker-build && make docker-run
+```
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/health` | GET | Liveness probe (`model_loaded` flag) |
+| `/model-info` | GET | Provenance: best model, CV metrics, features (FAIR/R) |
+| `/predict` | POST | `formula` + properties → predicted band gap (eV) |
+| `/docs` | GET | Interactive Swagger UI |
+
+Example:
+
+```bash
+curl -X POST http://localhost:8000/predict -H 'Content-Type: application/json' \
+  -d '{"formula":"MgO","formation_energy_per_atom":-3.0,"density":3.58,
+       "nsites":4,"energy_above_hull":0.0,"crystal_system":"Cubic",
+       "space_group":"Fm-3m"}'
+# {"formula":"MgO","predicted_band_gap_eV":4.1048}
+```
+
+**Production patterns implemented:**
+- Model loaded **once** at startup (lifespan), not per request (~35 ms/prediction)
+- Feature engineering **shared** with training via `src.data` — avoids train/serve skew
+- Schema-driven input validation (Pydantic) → free OpenAPI docs
+- Non-root container user, `HEALTHCHECK` using the `/health` endpoint
+- `.dockerignore` excludes `.env`, venv, and DVC cache so secrets never enter the image
+
+> Note: `models/model.pkl` is DVC-tracked (gitignored), so run `dvc pull`
+> before `docker build` on a fresh clone.
+
 ## Data Source
 
 Materials Project API: https://next-gen.materialsproject.org/api

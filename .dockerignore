@@ -1,0 +1,32 @@
+# Keep the build context small and secrets out of the image
+.git
+.github
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.ipynb_checkpoints
+
+# Secrets: never bake credentials into the image
+.env
+.env.*
+mlruns/
+mlflow.db*
+*.db-journal
+
+# Keep DVC internal cache out (model is copied explicitly)
+.dvc/cache
+.dvc/tmp
+
+# Notebooks/docs not needed at inference time
+notebooks/
+docs/
+
+# Raw data not needed at inference time
+data/raw/
+
+# Git/DVC metadata
+.gitignore
+dvc.lock
