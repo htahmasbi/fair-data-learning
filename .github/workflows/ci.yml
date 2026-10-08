@@ -26,11 +26,14 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run unit tests
-        run: python -m pytest tests/ -v
+      - name: Unit tests (fast, no model artifact required)
+        run: python -m pytest tests/ -v --ignore=tests/test_api.py
 
-      - name: Reproduce DVC pipeline (features -> train -> evaluate)
+      - name: Build model via DVC pipeline (models/ is DVC-tracked, absent in checkout)
         run: dvc repro
+
+      - name: API tests (require models/model.pkl)
+        run: python -m pytest tests/test_api.py -v
 
       - name: Verify metrics exist
         run: dvc metrics show
