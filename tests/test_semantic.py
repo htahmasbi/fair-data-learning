@@ -50,7 +50,9 @@ def test_graph_has_properties_and_provenance():
     n_band_gap = len(list(g.subject_objects(MAT.hasBandGap)))
     assert n_band_gap == 2
     # Provenance: every material links to a Materials Project URL
-    n_derived = len(list(g.triples((None, Namespace("https://www.w3.org/ns/prov#")["wasDerivedFrom"], None))))
+    from src.vocab import PROV
+
+    n_derived = len(list(g.triples((None, PROV.wasDerivedFrom, None))))
     assert n_derived == 2
 
 
@@ -59,3 +61,26 @@ def test_graph_serializes_to_turtle():
     ttl = g.serialize(format="turtle")
     assert "@prefix" in ttl
     assert "mat:" in ttl
+
+
+def test_dataset_collection_has_material_members():
+    """Stage 5: materials must be reachable from the dataset node, otherwise
+    SPARQL cannot join 'this dataset' to 'these materials'."""
+    from src.vocab import DATASETS, MP_OXIDES_DATASET_ID, PROV
+
+    g = build_graph(_sample_df())
+    dataset = DATASETS[MP_OXIDES_DATASET_ID]
+    members = list(g.objects(dataset, PROV.hadMember))
+    assert len(members) == 2
+    assert (dataset, RDF.type, PROV.Collection) in g
+
+
+def test_prov_namespace_is_canonical():
+    """PROV-O's canonical namespace is http:// - the https:// variant is a
+    *different* URI and would be aliased as prov1:, silently breaking any
+    query written against the standard prefix."""
+    from src.vocab import PROV
+
+    assert str(PROV) == "http://www.w3.org/ns/prov#"
+    ttl = build_graph(_sample_df()).serialize(format="turtle")
+    assert "prov1:" not in ttl

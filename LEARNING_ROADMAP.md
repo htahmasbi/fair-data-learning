@@ -129,9 +129,12 @@ For jobs involving production ML/AI systems.
 
 Once Stage 2 & 3 basics are done, combine them — this is the "semantic MLOps" niche that is rare and valuable.
 
-- [ ] Automated metadata generation for models/datasets (MLflow + DataCite crosswalk)
-- [ ] Publishing models with CFF (citation file format) to make them citable
-- [ ] Linking dataset ↔ model ↔ paper in a knowledge graph
+- [x] Linking dataset ↔ model ↔ metrics in a knowledge graph (PROV-O + ML-Schema, `src/model_rdf.py`)
+- [x] Model provenance: run → dataset, hyperparameters, evaluations, accountable agent (ORCID)
+- [x] Content-addressed model identity (md5 of artifact) + git-sha versioning
+- [x] Cross-domain SPARQL: materials → dataset → model → R² in one query
+- [ ] Automated metadata generation for models/datasets (MLflow + DataCite crosswalk) — JSON-LD/DataCite export
+- [ ] Publishing models with CFF (a model-specific CITATION.cff / DOI)
 - [ ] Dataset quality reporting with Frictionless
 - [ ] Contributing to a community ontology (e.g., Materials Ontology)
 
@@ -210,6 +213,7 @@ For job applications as Data Scientist / ML Engineer / FAIR data / data engineer
 | scikit-learn ML | Proficient | Proficient | ✅ done |
 | SQL | — | Basic | to do |
 | FAIR metadata/RDF | Proficient | Proficient | ✅ done |
+| Semantic MLOps (PROV-O/ML-Schema) | Proficient | Proficient | ✅ done |
 | DVC | Proficient | Proficient | ✅ done |
 | MLflow | Proficient | Proficient | ✅ done |
 | Docker/CI | Basic | Proficient | in progress (Dockerfile written, build untested) |
@@ -221,10 +225,11 @@ For job applications as Data Scientist / ML Engineer / FAIR data / data engineer
 
 - Built a **reproducible ML pipeline** (DVC + MLflow) predicting DFT band gap of 1000 oxide materials; GradientBoost CV R²=0.72
 - Exposed the model as a **production REST API** (FastAPI, Docker, non-root, healthcheck) sharing feature code between train/serve to avoid skew
-- Made the dataset **FAIR**: JSON-LD metadata (Schema.org/DCAT/PROV-O), OWL ontology, 12k-triple **RDF knowledge graph** with **SPARQL** queries, RO-Crate packaging, Zenodo DOI config
-- Added **26 automated tests** + GitHub Actions CI (pytest → dvc repro → metrics)
+- Made the dataset **FAIR**: JSON-LD metadata (Schema.org/DCAT/PROV-O), OWL ontology, 13k-triple **RDF knowledge graph** with **SPARQL** queries, RO-Crate packaging, Zenodo DOI config
+- Implemented **semantic MLOps**: model provenance as RDF (PROV-O + ML-Schema) linked to the dataset, queryable in the same graph as the materials
+- Added **39 automated tests** + GitHub Actions CI (pytest → dvc repro → metrics)
 
 ---
 
-*Last updated: 2026-09-23*
+*Last updated: 2026-10-09*
 *Owner: htahmasbi*

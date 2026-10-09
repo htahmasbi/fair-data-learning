@@ -49,10 +49,16 @@ stages:
     cmd: python src/rdf.py
     deps:
       - src/rdf.py
+      - src/model_rdf.py
       - src/vocab.py
       - src/config.py
       - data/processed/mp_oxides_clean.csv
+      - metrics.json          # model measurements (Stage 5)
+      - params.yaml           # hyperparameters (Stage 5)
+      - CITATION.cff          # author ORCID / license (Stage 5)
+      - models/model.pkl      # artifact identity (content hash)
     params:
       - data
+      - train
     outs:
       - data/processed/knowledge_graph.ttl

@@ -6,6 +6,10 @@ Each material row becomes a node typed as mat:Material with:
   - element participation (linked to Wikidata chemical-element entities)
   - provenance: every material wasDerivedFrom a Materials Project URL
 
+The dataset itself is a prov:Collection whose members are the materials,
+and main() also merges the model-provenance graph (src/model_rdf.py) so
+one SPARQL query can traverse materials -> dataset -> model -> metrics.
+
 Output: data/processed/knowledge_graph.ttl (interoperable standard format).
 """
 
@@ -22,7 +26,27 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import load_params
-from src.vocab import CRYSTAL_SYSTEMS, DATASETS, MATERIALS, MAT, PROV, RDFS, SDO, SPACE_GROUPS, WIKIDATA, XSD
+from src.vocab import (
+    ALGORITHMS,
+    CRYSTAL_SYSTEMS,
+    DATASETS,
+    HYPERPARAMETERS,
+    IMPLEMENTATIONS,
+    MATERIALS,
+    MAT,
+    MEASURES,
+    MLS,
+    MODELS,
+    MP_OXIDES_DATASET_ID,
+    PROV,
+    RDFS,
+    RUNS,
+    SDO,
+    SPACE_GROUPS,
+    TASKS,
+    WIKIDATA,
+    XSD,
+)
 
 # Wikidata chemical element URIs (subset used by the dataset; extendable).
 ELEMENT_URIS = {
@@ -64,14 +88,18 @@ def build_graph(df: pd.DataFrame) -> Graph:
     g.bind("matl", MATERIALS)  # handy short prefix for material entities
     g.bind("sdo", SDO)
     g.bind("prov", PROV)
+    g.bind("mls", MLS)
     g.bind("rdfs", RDFS)
     g.bind("wd", WIKIDATA)
 
-    dataset_uri = DATASETS["mp-oxides-v1"]
+    dataset_uri = DATASETS[MP_OXIDES_DATASET_ID]
 
     for _, row in df.iterrows():
         m = material_uri(row["material_id"])
         g.add((m, RDF.type, MAT.Material))
+        # Membership makes the dataset <-> materials link queryable, so
+        # SPARQL can count materials *and* follow provenance to the model.
+        g.add((dataset_uri, PROV.hadMember, m))
         g.add((m, RDFS.label, Literal(row["formula"])))
         g.add((m, MAT.hasFormula, Literal(row["formula"])))
         g.add((m, MAT.hasBandGap, Literal(float(row["band_gap"]), datatype=XSD.double)))
@@ -104,6 +132,8 @@ def build_graph(df: pd.DataFrame) -> Graph:
 
     # Dataset-level provenance
     g.add((dataset_uri, RDF.type, PROV.Entity))
+    g.add((dataset_uri, RDF.type, PROV.Collection))
+    g.add((dataset_uri, RDF.type, MLS.Dataset))  # ML-Schema type for MLS:Run inputs
     g.add((dataset_uri, SDO.name, Literal("Materials Project Oxides dataset (1000 subset)")))
     query_bnode = BNode()
     g.add((dataset_uri, PROV.wasGeneratedBy, query_bnode))
@@ -125,6 +155,26 @@ def main() -> None:
     out_dir = Path(params["data"]["output_dir"])
     df = pd.read_csv(Path(params["data"]["input"]))
     g = build_graph(df)
+
+    # Stage 5: merge model provenance into the same graph, so a single
+    # SPARQL query can walk materials -> dataset -> training run -> model.
+    from src.model_rdf import build_model_graph, read_metrics
+
+    model_graph = build_model_graph(metrics=read_metrics(), params=params)
+    for triple in model_graph:
+        g.add(triple)
+    for prefix, ns in {
+        "model": MODELS,
+        "run": RUNS,
+        "meas": MEASURES,
+        "task": TASKS,
+        "hparam": HYPERPARAMETERS,
+        "algo": ALGORITHMS,
+        "impl": IMPLEMENTATIONS,
+    }.items():
+        g.bind(prefix, ns)
+    print(f"Merged {len(model_graph)} model-provenance triples")
+
     out_path = out_dir / "knowledge_graph.ttl"
     g.serialize(destination=out_path, format="turtle")
     print(f"Built graph with {len(g)} triples from {len(df)} materials")

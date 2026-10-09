@@ -3,7 +3,7 @@
     "schema": "https://schema.org/",
     "dcat": "https://www.w3.org/ns/dcat#",
     "dcterms": "https://www.dublincore.org/specifications/dublin-core/dcmi-terms/",
-    "prov": "https://www.w3.org/ns/prov#",
+    "prov": "http://www.w3.org/ns/prov#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dpv": "https://www.dataprotection.gov.gg/legal/privacy-policy/"
   },

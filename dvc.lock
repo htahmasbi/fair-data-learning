@@ -163,29 +163,62 @@ stages:
   semantic:
     cmd: python src/rdf.py
     deps:
+    - path: CITATION.cff
+      hash: md5
+      md5: 5e594cb5a41ad5ebebd3306896ad356a
+      size: 840
     - path: data/processed/mp_oxides_clean.csv
       hash: md5
       md5: 6c0d68b5aba9410cd70a192babcabf8c
       size: 106546
+    - path: metrics.json
+      hash: md5
+      md5: 7f5aa32921512cf620619393a9e12b66
+      size: 595
+    - path: models/model.pkl
+      hash: md5
+      md5: cd8f83927611732941e7a9dccd174a57
+      size: 744210
+    - path: params.yaml
+      hash: md5
+      md5: 8983686b71d366a40d02c2517388bc1c
+      size: 673
     - path: src/config.py
       hash: md5
       md5: 0dcd0d2993c406298cf92738e3b89194
       size: 556
+    - path: src/model_rdf.py
+      hash: md5
+      md5: 7d354514f70ee9148209b0fc3f59ce38
+      size: 11322
     - path: src/rdf.py
       hash: md5
-      md5: dce25e3a7ac2d81504c34b73231e3834
-      size: 4671
+      md5: 4c7a7792eeb36144604452dd8f02ee67
+      size: 6096
     - path: src/vocab.py
       hash: md5
-      md5: d706adb2d0afa7f905a1b01cec0c6e75
-      size: 1114
+      md5: 4bed9f40a7f1fedf5b89ee313e3de3bf
+      size: 2341
     params:
       params.yaml:
         data:
           input: data/processed/mp_oxides_clean.csv
           output_dir: data/processed
+        train:
+          random_state: 42
+          cv_folds: 5
+          test_size: 0.2
+          target: band_gap
+          models:
+            Ridge:
+              alpha: 1.0
+            RandomForest:
+              n_estimators: 200
+            GradientBoost:
+              learning_rate: 0.1
+              max_iter: 200
     outs:
     - path: data/processed/knowledge_graph.ttl
       hash: md5
-      md5: 098a9f777edc00f668d47653b6f758e0
-      size: 556407
+      md5: 1a394e8b022bfdf96975441340fabe81
+      size: 586862
